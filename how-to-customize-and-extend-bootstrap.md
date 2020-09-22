@@ -28,7 +28,7 @@ If you need to change backgrounds, borders, sizes, margins & paddings and other 
 
 ##### Links
 
-https://getbootstrap.com/docs/3.4/css/#less-variables
+https://getbootstrap.com/docs/3.4/css/#less-variables  
 https://getbootstrap.com/docs/4.5/getting-started/theming/#variable-defaults
 
 #### Do
@@ -58,7 +58,7 @@ This is built-in functionality to customize Bootstrap. You probably always will 
 
 ##### Links
 
-https://getbootstrap.com/docs/3.4/css/#less-variables-colors
+https://getbootstrap.com/docs/3.4/css/#less-variables-colors  
 https://getbootstrap.com/docs/4.5/getting-started/theming/#theme-colors
 
 #### Do
@@ -100,8 +100,8 @@ These colors often used in Bootstrap classes, so if you want to change body back
 
 ##### Links
 
-https://getbootstrap.com/docs/3.4/css/#less-variables-scaffolding
-https://getbootstrap.com/docs/4.5/content/reboot/#page-defaults
+https://getbootstrap.com/docs/3.4/css/#less-variables-scaffolding  
+https://getbootstrap.com/docs/4.5/content/reboot/#page-defaults  
 https://getbootstrap.com/docs/4.5/content/typography/#global-settings
 
 ### Do
@@ -146,7 +146,7 @@ These calculations allow to correctly position elements on layout and prevent it
 
 ##### Links
 
-https://getbootstrap.com/docs/3.4/css/#less-variables-components
+https://getbootstrap.com/docs/3.4/css/#less-variables-components  
 https://getbootstrap.com/docs/4.5/utilities/spacing/
 
 ## Bootstrap extensibility
@@ -155,7 +155,7 @@ https://getbootstrap.com/docs/4.5/utilities/spacing/
 
 #### Do
 
-If you need to changes styles specific for some components or situations, like adding spacing before icon, then always incapsulate these changes into specific classes, i.e.:
+If you need to changes styles specific for some components or situations, like adding spacing before icon, then always encapsulate these changes into specific classes, i.e.:
 ```scss
 .category-page {
   .btn .fa {
@@ -183,6 +183,13 @@ Frameworks like Angular use [Shadow DOM](https://developer.mozilla.org/en-US/doc
 > Components should be built with a base class and extended via modifier classes
 
 > An important aspect of web components is encapsulation — being able to keep the markup structure, style, and behavior hidden and separate from other code on the page so that different parts do not clash, and the code can be kept nice and clean.
+
+#### Programming principles
+
+[Encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))  
+[Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle)  
+[Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle)  
+[Interface segregation principle](https://en.wikipedia.org/wiki/Interface_segregation_principle)  
 
 #### Links
 
