@@ -10,6 +10,145 @@
 
 ## Bootstrap customization
 
+A little note about difference between Bootstrap 4 and 3 from authors of Bootstrap:
+
+> In Bootstrap 3, theming was largely driven by variable overrides in LESS, custom CSS, and a separate theme stylesheet that we included in our dist files. With some effort, one could completely redesign the look of Bootstrap 3 without touching the core files. Bootstrap 4 provides a familiar, but slightly different approach.
+>
+> Now, theming is accomplished by Sass variables, Sass maps, and custom CSS. There’s no more dedicated theme stylesheet; instead, you can enable the built-in theme to add gradients, shadows, and more.
+
+### Variables
+
+The primary customization way for Bootstrap is to override Bootstrap variable values.
+
+If you need to change backgrounds, borders, sizes, margins & paddings and other common parts of HTML elements and Bootstrap components for *all their instances across the site*, then you need to override Bootstrap variable values.
+
+#### Default values
+
+> Every Sass variable in Bootstrap 4 includes the !default flag allowing you to override the variable’s default value in your own Sass without modifying Bootstrap’s source code. Copy and paste variables as needed, modify their values, and remove the !default flag. If a variable has already been assigned, then it won’t be re-assigned by the default values in Bootstrap.
+
+##### Links
+
+https://getbootstrap.com/docs/3.4/css/#less-variables
+https://getbootstrap.com/docs/4.5/getting-started/theming/#variable-defaults
+
+#### Do
+
+Use bootstrap variables to change color palette:
+
+##### Default
+```scss
+// v3
+$brand-primary: darken(#428bca, 6.5%) !default;
+// v4
+$primary: $blue !default;
+```
+![](assets/how-to-customize-and-extend-bootstrap/variables-primary-default.png)
+##### Customized
+```scss
+// v3
+$brand-primary: #e51400;
+// v4
+$primary: #e51400;
+```
+![](assets/how-to-customize-and-extend-bootstrap/variables-primary-custom.png)
+
+##### Why?
+
+This is built-in functionality to customize Bootstrap. You probably always will have primary and some additional colors (like for errors, warnings) in your color palette, so why don't use something already exists?
+
+##### Links
+
+https://getbootstrap.com/docs/3.4/css/#less-variables-colors
+https://getbootstrap.com/docs/4.5/getting-started/theming/#theme-colors
+
+#### Do
+
+Use bootstrap variables to change global colors of primary HTML elements such as `body` or links, set primary font family or change font sizes:
+
+##### Default
+```scss
+// v3
+$body-bg: #fff !default;
+$link-color: $brand-primary !default;
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-size-base: 14px !default;
+// v4
+$body-bg: $white !default;
+$link-color: theme-color("primary") !default;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-size-base: 1rem !default;
+```
+![](assets/how-to-customize-and-extend-bootstrap/variables-bg-links-default.png)
+##### Customized
+```scss
+// v3
+$body-bg: #000;
+$link-color: $brand-warning;
+$font-family-sans-serif: "Comic Sans MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base: 21px;
+// v4
+$body-bg: $black;
+$link-color: theme-color("warning");
+$font-family-sans-serif: "Comic Sans MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-size-base: 1.5rem;
+```
+![](assets/how-to-customize-and-extend-bootstrap/variables-bg-links-custom.png)
+
+##### Why?
+
+These colors often used in Bootstrap classes, so if you want to change body background or link colors, then you want to also change all places in code which base their styles in these colors.
+
+##### Links
+
+https://getbootstrap.com/docs/3.4/css/#less-variables-scaffolding
+https://getbootstrap.com/docs/4.5/content/reboot/#page-defaults
+https://getbootstrap.com/docs/4.5/content/typography/#global-settings
+
+### Do
+
+Use Bootstrap variables to configure default margins & paddings (spaces in Bootstrap v4)
+
+##### Default
+```scss
+// v3
+$padding-base-vertical: 6px !default;
+$padding-base-horizontal: 12px !default;
+// v4
+$spacer: 1rem !default;
+```
+##### Customized
+```scss
+// v3
+$padding-base-vertical: 10px;
+$padding-base-horizontal: 20px;
+// v4
+$spacer: 1.25rem;
+```
+
+##### Why?
+
+Bootstrap SCSS contains calculations based on these variables, for example:
+```scss
+// v3
+//** Default `.form-control` height
+$input-height-base: ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
+//v4
+$input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false)) !default;
+```
+These calculations allow to correctly position elements on layout and prevent it breaking.
+
+###### Layout with control sizes based on variables
+![](assets/how-to-customize-and-extend-bootstrap/layout-calculated.png)
+
+###### Layout with random control sizes
+![](assets/how-to-customize-and-extend-bootstrap/layout-random-spacing.png)
+
+
+##### Links
+
+https://getbootstrap.com/docs/3.4/css/#less-variables-components
+https://getbootstrap.com/docs/4.5/utilities/spacing/
+
 ## Bootstrap extensibility
 
 ### Encapsulate component-specific code into special classes or use framework possibilities
@@ -39,13 +178,13 @@ If you will use global styles for this without encapsulation, these styles will 
 
 Frameworks like Angular use [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to [encapsulate](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) styles, i.e. isolate styles from component to prevent their affection of global styles or another component styles.
 
-#### Citations:
+#### Citations
 
 > Components should be built with a base class and extended via modifier classes
 
 > An important aspect of web components is encapsulation — being able to keep the markup structure, style, and behavior hidden and separate from other code on the page so that different parts do not clash, and the code can be kept nice and clean.
 
-#### Links:
+#### Links
 
 * https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#Specificity
 * https://getbootstrap.com/docs/4.5/extend/approach/#classes
