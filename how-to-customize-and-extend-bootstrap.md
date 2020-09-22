@@ -104,9 +104,13 @@ https://getbootstrap.com/docs/3.4/css/#less-variables-scaffolding
 https://getbootstrap.com/docs/4.5/content/reboot/#page-defaults  
 https://getbootstrap.com/docs/4.5/content/typography/#global-settings
 
-### Do
+#### Do
 
 Use Bootstrap variables to configure default margins & paddings (spaces in Bootstrap v4)
+
+#### Don't
+
+Use "random" - not stored in existing variables or extended maps [see below] - spacing. // TODO: Add link
 
 ##### Default
 ```scss
@@ -151,6 +155,56 @@ https://getbootstrap.com/docs/4.5/utilities/spacing/
 
 ## Bootstrap extensibility
 
+### Use Bootstrap mixing to
+
+### Use modifiers to extend existing component styles
+
+#### Do
+
+If you need to add *yet another variant* of existing component, like button, then use modifiers (suach as built-in `.btn-primary`) to do that.
+
+#### Do
+
+Use modifiers when you need to do multiple changes or use custom values, such as change both background, border and color or change set padding values specific to this component.
+
+The following code will add provide `.btn-white` modifier (with white background) for buttons:
+```scss
+// v3
+.btn-white {
+  @include button-variant($btn-white-color, $btn-white-bg, $btn-white-border);
+}
+```
+
+#### Don't
+
+Don't use modifiers for providing simple, not reused changes, such as background only change of specific button. Use encapsulation instead.
+
+#### Don't
+
+Don't use modifiers for providing simple, but reused changes, such as new variation of background available to be used in any component.
+
+#### Why?
+
+If you will change existing variant directly, then:
+1. You may loose existing style, i.e. if you will set white colors to `.btn-primary` class, then you will not be able to use button with primary background in HTML
+2. This change may break layout, i.e. if yor primary color is red and page background is white, then set white background to `.btn-primary` class will make this button invisible.
+
+#### How problem solved in frameworks?
+
+There are existing frameworks, approaches and tools which implement these approach, such as popular [BEM methodology](http://getbem.com/). Unfortunately, they are incompatible with Bootstrap without singnificant relaxing of their rules. Bootstrap use some parts of these approaches.
+
+#### Citations
+
+> As such, components should be built with a base class that houses common, not-to-be overridden property-value pairs. For example, .btn and .btn-primary. We use .btn for all the common styles like display, padding, and border-width. We then use modifiers like .btn-primary to add the color, background-color, border-color, etc.
+> 
+> Modifier classes should only be used when there are multiple properties or values to be changed across multiple variants. Modifiers are not always necessary, so be sure you’re actually saving lines of code and preventing unnecessary overrides when creating them. Good examples of modifiers are our theme color classes and size variants.
+
+#### Links
+
+https://getbootstrap.com/docs/4.5/extend/approach/#classes
+http://getbem.com/introduction/
+// TODO: add links to upcoming sections of helpers and encapsulation
+
 ### Encapsulate component-specific code into special classes or use framework possibilities
 
 #### Do
@@ -174,7 +228,7 @@ If you will use global styles for this without encapsulation, these styles will 
 }
 ```
 
-#### How problem resolved in frameworks?
+#### How problem solved in frameworks?
 
 Frameworks like Angular use [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) to [encapsulate](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) styles, i.e. isolate styles from component to prevent their affection of global styles or another component styles.
 
