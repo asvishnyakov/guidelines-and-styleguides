@@ -155,7 +155,75 @@ https://getbootstrap.com/docs/4.5/utilities/spacing/
 
 ## Bootstrap extensibility
 
-### Use Bootstrap mixing to
+### Use Bootstrap mixins or write yourself
+
+#### Do
+
+If you add styles similar to already existing in Bootstrap, then first try to find mixin for that. Probably it exists and will allow you to make your work in single line.
+
+Bootstrap provide some mixins to allow you automate some style generation, for example:
+1. Add new color variants for buttons, alerts, background helper
+2. Add new sizes for buttons, pagination or set width & height for any element
+3. Set border radiuses, add shadow or gradients
+4. Add grid implicitly to custom classes
+5. Add helpers to custom classes
+
+```scss
+@include media-breakpoint-up(sm) { /* write here styles which will be visible at small and larger screen sizes */ }
+```
+
+#### Do
+
+If you have multiple similar places in your scss, then probably you may reuse this code, may be with some parameters.
+
+```scss
+@mixin vc-flying-placeholder-size($input-class, $padding-horizontal, $padding-vertical) {
+    input[vc-flying-placeholder],
+    textarea[vc-flying-placeholder],
+    select[vc-flying-placeholder] {
+      &#{$input-class} ~ label.vc-flying-placeholder-class {
+        left: $padding-horizontal - $padding-xs-horizontal + 1px; // 1px = border width
+        top: $padding-vertical + 1px; // 1px = border
+      }
+    }
+  }
+
+@mixin vc-labeled-input-size($input-class, $padding-horizontal, $padding-vertical) {
+  vc-labeled-input input {
+    &#{$input-class} ~ label {
+      left: $padding-horizontal - $padding-xs-horizontal + 1px; // 1px = border width
+      top: $padding-vertical + 1px; // 1px = border
+    }
+  }
+}
+```
+
+#### Don't
+
+Don't use [deprecated vendor mixins](https://getbootstrap.com/docs/4.5/migration/#vendor-prefix-mixins) or write vendor prefixes. Instead, use [Autoprefixer](https://github.com/postcss/autoprefixer).
+
+#### Why?
+
+1. Code reuse. You don't need to reinvent the wheel. If something already exist - use that.
+2. Forgotten features. Mixin for new button color variant already include all needed styles, including styles hover, pressing or focus states. `color-yiq` mixin will always set color contrast to used background, so you never will forgot to make text visible on bright element.
+3. Single place to change. If you will always use same mixing to set, for example, specific spacing & size to some elements, then modification
+
+#### Citations
+
+> Utility mixins are mixins that combine otherwise unrelated CSS properties to achieve a specific goal or task.
+
+#### Programming principles
+
+[Code reuse](https://en.wikipedia.org/wiki/Code_reuse)  
+[Open–closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)  
+[Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)  
+
+#### Links
+
+https://getbootstrap.com/docs/3.4/css/#less-mixins-utility  
+https://getbootstrap.com/docs/4.5/utilities/float/#mixins 
+https://getbootstrap.com/docs/4.5/layout/grid/#sass-mixins  
+https://www.sass-lang.com/documentation/at-rules/mixin
 
 ### Use modifiers to extend existing component styles
 
