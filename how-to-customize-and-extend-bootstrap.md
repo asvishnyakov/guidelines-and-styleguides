@@ -169,7 +169,9 @@ Bootstrap provide some mixins to allow you automate some style generation, for e
 5. Add helpers to custom classes
 
 ```scss
-@include media-breakpoint-up(sm) { /* write here styles which will be visible at small and larger screen sizes */ }
+@include media-breakpoint-up(sm) {
+  // write here styles which will be visible at small and larger screen sizes
+}
 ```
 
 #### Do
