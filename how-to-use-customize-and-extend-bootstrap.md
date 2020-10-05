@@ -1,4 +1,4 @@
-# How to customize and extend bootstrap
+# How to use, customize and extend bootstrap
 
 ## About terms
 
@@ -8,15 +8,62 @@
 
 \- [Oxford Dictionary](https://www.lexico.com/)
 
+## Content
+1. [Bootstrap usage](#bootstrap-usage)
+   1. [Source code](#source-code)
+   2. [Javascript](#javascript)
+   3. [How to use](#how-to-use)
+2. [Bootstrap customization](#bootstrap-customization)
+   1. [Theme Builder and other utilities](#theme-builder-and-other-utilities)
+   2. [Shared variables](#shared-variables)
+   3. [Component style variables](#component-style-variables)
+   4. [Feature switches](#feature-switches)
+3. [Bootstrap extensibility](#bootstrap-extensibility)
+   1. [Maps and loops](#maps-and-loops)
+   2. [Mixins](#mixins)
+   3. [Modifiers](#modifiers)
+   4. [Encapsulation](#encapsulation)
+
+## Bootstrap usage
+
+### Source code
+
+Bootstrap [provide](https://getbootstrap.com/docs/4.5/getting-started/download/) different ways to include it into your project: use pre-compiled bundle from CDN, use package manager like npm or yarn or compile it from source code.
+* For fast startup, it's better to include [full bundle](https://getbootstrap.com/docs/4.5/getting-started/contents/#precompiled-bootstrap) and just use any of available features.
+* For performance, it's better to [leave only code you needed](https://getbootstrap.com/docs/4.5/getting-started/contents/#bootstrap-source-code): just include variables, utilities and only needed components in same order as in `bootstrap.scss`
+
+### Javascript
+
+By default, bootstrap (v3, v4) shipped with javascript components based on jquery. If you use React, angular.js, Angular or Vue.js, use one of the following replacements or find better one:
+* [React Bootstrap](https://react-bootstrap.github.io/)
+* [Angular UI Bootstrap](https://angular-ui.github.io/bootstrap/)
+* [ng-bootstrap](https://ng-bootstrap.github.io/) or [ngx-bootstrap](https://valor-software.com/ngx-bootstrap/)
+* [BootstrapVue](https://bootstrap-vue.org/)
+
+### How to use
+
+Just read Bootstrap documentation:
+* [v3](https://getbootstrap.com/docs/3.4/)
+* [v4](https://getbootstrap.com/docs/4.5/getting-started/introduction/)
+* [v5](https://v5.getbootstrap.com/)
+
+Bootstrap 5 documentation is much better than v3 and v4. While it's newer and include v5-specific things, most of content are still applicable for older versions of bootstrap.
+
 ## Bootstrap customization
 
 A little note about difference between Bootstrap 4 and 3 from authors of Bootstrap:
 
 > In Bootstrap 3, theming was largely driven by variable overrides in LESS, custom CSS, and a separate theme stylesheet that we included in our dist files. With some effort, one could completely redesign the look of Bootstrap 3 without touching the core files. Bootstrap 4 provides a familiar, but slightly different approach.
 >
-> Now, theming is accomplished by Sass variables, Sass maps, and custom CSS. There’s no more dedicated theme stylesheet; instead, you can enable the built-in theme to add gradients, shadows, and more.
+> Now, theming is accomplished by Sass variables, Sass maps, and custom CSS. There's no more dedicated theme stylesheet; instead, you can enable the built-in theme to add gradients, shadows, and more.
 
-### Variables
+### Theme builder and other utilities
+
+[Bootstrap Build](https://bootstrap.build/) allows you quickly & easy customize Bootstrap (make theme) with real time preview for all Bootstrap controls.
+
+You also may read about [other useful utilities](https://habr.com/ru/post/520788/) (Russian).
+
+### Shared variables
 
 The primary customization way for Bootstrap is to override Bootstrap variable values.
 
@@ -24,7 +71,7 @@ If you need to change backgrounds, borders, sizes, margins & paddings and other 
 
 #### Default values
 
-> Every Sass variable in Bootstrap 4 includes the !default flag allowing you to override the variable’s default value in your own Sass without modifying Bootstrap’s source code. Copy and paste variables as needed, modify their values, and remove the !default flag. If a variable has already been assigned, then it won’t be re-assigned by the default values in Bootstrap.
+> Every Sass variable in Bootstrap 4 includes the !default flag allowing you to override the variable's default value in your own Sass without modifying Bootstrap's source code. Copy and paste variables as needed, modify their values, and remove the !default flag. If a variable has already been assigned, then it won't be re-assigned by the default values in Bootstrap.
 
 ##### Links
 
@@ -42,7 +89,7 @@ $brand-primary: darken(#428bca, 6.5%) !default;
 // v4
 $primary: $blue !default;
 ```
-![](assets/how-to-customize-and-extend-bootstrap/variables-primary-default.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/variables-primary-default.png)
 ##### Customized
 ```scss
 // v3
@@ -50,7 +97,7 @@ $brand-primary: #e51400;
 // v4
 $primary: #e51400;
 ```
-![](assets/how-to-customize-and-extend-bootstrap/variables-primary-custom.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/variables-primary-custom.png)
 
 ##### Why?
 
@@ -78,7 +125,7 @@ $link-color: theme-color("primary") !default;
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-base: 1rem !default;
 ```
-![](assets/how-to-customize-and-extend-bootstrap/variables-bg-links-default.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/variables-bg-links-default.png)
 ##### Customized
 ```scss
 // v3
@@ -92,7 +139,7 @@ $link-color: theme-color("warning");
 $font-family-sans-serif: "Comic Sans MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-size-base: 1.5rem;
 ```
-![](assets/how-to-customize-and-extend-bootstrap/variables-bg-links-custom.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/variables-bg-links-custom.png)
 
 ##### Why?
 
@@ -142,10 +189,10 @@ $input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-he
 These calculations allow to correctly position elements on layout and prevent it breaking.
 
 ###### Layout with control sizes based on variables
-![](assets/how-to-customize-and-extend-bootstrap/layout-calculated.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/layout-calculated.png)
 
 ###### Layout with random control sizes
-![](assets/how-to-customize-and-extend-bootstrap/layout-random-spacing.png)
+![](assets/how-to-use-customize-and-extend-bootstrap/layout-random-spacing.png)
 
 
 ##### Links
@@ -155,7 +202,9 @@ https://getbootstrap.com/docs/4.5/utilities/spacing/
 
 ## Bootstrap extensibility
 
-### Use Bootstrap mixins or write yourself
+### Mixins
+
+Reuse Bootstrap mixins or write yourself.
 
 #### Do
 
@@ -217,7 +266,7 @@ Don't use [deprecated vendor mixins](https://getbootstrap.com/docs/4.5/migration
 #### Programming principles
 
 [Code reuse](https://en.wikipedia.org/wiki/Code_reuse)  
-[Open–closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)  
+[Open-closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)  
 [Dependency inversion principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle)  
 
 #### Links
@@ -227,7 +276,9 @@ https://getbootstrap.com/docs/4.5/utilities/float/#mixins
 https://getbootstrap.com/docs/4.5/layout/grid/#sass-mixins  
 https://www.sass-lang.com/documentation/at-rules/mixin
 
-### Use modifiers to extend existing component styles
+### Modifiers
+
+Use modifiers to extend existing component styles.
 
 #### Do
 
@@ -267,7 +318,7 @@ There are existing frameworks, approaches and tools which implement these approa
 
 > As such, components should be built with a base class that houses common, not-to-be overridden property-value pairs. For example, .btn and .btn-primary. We use .btn for all the common styles like display, padding, and border-width. We then use modifiers like .btn-primary to add the color, background-color, border-color, etc.
 > 
-> Modifier classes should only be used when there are multiple properties or values to be changed across multiple variants. Modifiers are not always necessary, so be sure you’re actually saving lines of code and preventing unnecessary overrides when creating them. Good examples of modifiers are our theme color classes and size variants.
+> Modifier classes should only be used when there are multiple properties or values to be changed across multiple variants. Modifiers are not always necessary, so be sure you-re actually saving lines of code and preventing unnecessary overrides when creating them. Good examples of modifiers are our theme color classes and size variants.
 
 #### Links
 
@@ -275,7 +326,9 @@ https://getbootstrap.com/docs/4.5/extend/approach/#classes
 http://getbem.com/introduction/
 // TODO: add links to upcoming sections of helpers and encapsulation
 
-### Encapsulate component-specific code into special classes or use framework possibilities
+### Encapsulation
+
+Encapsulate component-specific code into special classes or use framework possibilities.
 
 #### Do
 
@@ -306,7 +359,7 @@ Frameworks like Angular use [Shadow DOM](https://developer.mozilla.org/en-US/doc
 
 > Components should be built with a base class and extended via modifier classes
 
-> An important aspect of web components is encapsulation — being able to keep the markup structure, style, and behavior hidden and separate from other code on the page so that different parts do not clash, and the code can be kept nice and clean.
+> An important aspect of web components is encapsulation - being able to keep the markup structure, style, and behavior hidden and separate from other code on the page so that different parts do not clash, and the code can be kept nice and clean.
 
 #### Programming principles
 
