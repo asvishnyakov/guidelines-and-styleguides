@@ -89,7 +89,7 @@ $brand-primary: darken(#428bca, 6.5%) !default;
 // v4
 $primary: $blue !default;
 ```
-![](assets/how-to-use-customize-and-extend-bootstrap/variables-primary-default.png)
+![](assets/bootstrap/variables-primary-default.png)
 ##### Customized
 ```scss
 // v3
@@ -97,7 +97,7 @@ $brand-primary: #e51400;
 // v4
 $primary: #e51400;
 ```
-![](assets/how-to-use-customize-and-extend-bootstrap/variables-primary-custom.png)
+![](assets/bootstrap/variables-primary-custom.png)
 
 ##### Why?
 
@@ -125,7 +125,7 @@ $link-color: theme-color("primary") !default;
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-base: 1rem !default;
 ```
-![](assets/how-to-use-customize-and-extend-bootstrap/variables-bg-links-default.png)
+![](assets/bootstrap/variables-bg-links-default.png)
 ##### Customized
 ```scss
 // v3
@@ -139,7 +139,7 @@ $link-color: theme-color("warning");
 $font-family-sans-serif: "Comic Sans MS", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-size-base: 1.5rem;
 ```
-![](assets/how-to-use-customize-and-extend-bootstrap/variables-bg-links-custom.png)
+![](assets/bootstrap/variables-bg-links-custom.png)
 
 ##### Why?
 
@@ -189,10 +189,10 @@ $input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-he
 These calculations allow to correctly position elements on layout and prevent it breaking.
 
 ###### Layout with control sizes based on variables
-![](assets/how-to-use-customize-and-extend-bootstrap/layout-calculated.png)
+![](assets/bootstrap/layout-calculated.png)
 
 ###### Layout with random control sizes
-![](assets/how-to-use-customize-and-extend-bootstrap/layout-random-spacing.png)
+![](assets/bootstrap/layout-random-spacing.png)
 
 
 ##### Links
